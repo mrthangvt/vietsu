@@ -404,3 +404,79 @@ Làm theo hai ảnh anh gửi: ảnh một góc phố chụp từ trên cao và 
   - Cảnh 11:30: máy bắt đầu từ xa (900 m, cao 320 m) rồi bay vào đầu cầu Sài Gòn. Có ụ bê tông, ụ đất cho bộ binh hai bên khi giao tranh với M48.
   - 11:57: bỏ nhà trong vòng 55 m quanh ngã tư Hàng Xanh và mọi nhà nằm trên lòng đường đoàn xe đi (cách tim đường dưới 12 m).
   - 390 húc cổng: hai cánh cổng bật vào sân, gãy khỏi trụ, đổ nằm trên bãi cỏ hai bên lối vào. Trước đây cánh cổng nằm lơ lửng chắn ngang lối, vì gốc toạ độ cánh ở tâm cánh.
+
+## 28. Sửa V2.0, gói 1.1.0 (29/11, góp ý 02:32)
+- **Khí tài thay bằng mẫu kho chung** (`_KHO-CHUNG/khi-tai`, chép vào `props/khi-tai/`):
+  - Xe: T-54B, M48A3, M41A3, M113, K-63, ZIL-157, ATS-59, lựu pháo M-46.
+  - Máy bay: A-37B, C-130A, UH-1H.
+  - `rieng.js` đổi đường dẫn cũ sang mẫu kho ngay trong `glbLoad`, nên không phải sửa từng chỗ dùng.
+  - Bánh xe quay theo quãng đường xe đi. Xích chạy bằng morph. Cánh quạt chỉ quay khi máy bay đang bay, máy bay đỗ thì đứng yên.
+  - Xe ở xa (quá 150 m × tỉ lệ) dùng một lưới gộp cho nhẹ.
+  - Số hiệu 843, 390 dán lên tháp pháo, đặt bằng tia chiếu vào mặt tháp.
+- **Xe kéo pháo:** ATS-59 bánh xích kéo M-46. Trước đây dùng xe tải kéo.
+  - Góp ý 03:03: mắt kéo đầu càng M-46 (`tai_keo`) móc đúng vào móc kéo sau đuôi ATS-59 (`moc_keo`), đầu càng ngóc nhẹ cho bằng độ cao móc.
+  - Xe đi sau mỗi xe kéo pháo cách thêm 32 m (pháo dài 35 m ở tỉ lệ ×3), không còn đè vào nòng pháo.
+- **Cảnh cận khí tài:**
+  - Đoàn xe tầng chiến dịch: nửa đầu mỗi cú máy lướt đoàn quay sát sườn một xe (xe tăng, ATS-59 + M-46, K-63, xe tải), thấy bánh xe và xích chạy, rồi cẩu máy lên cao như cũ.
+  - Nội đô:
+    - T02-A: máy thấp sát sườn xe 843, phía sau là hai hàng dân vẫy chào.
+    - C10-B: máy phía trước, chếch sườn xe 843.
+  - Tân Sơn Nhất:
+    - C04-A: máy vòng sát chiếc C-130A rồi sát trực thăng UH-1.
+    - C04-B: máy phía trước chếch sườn chiếc A-37 dẫn đầu, sau lùi xa.
+- **Nhân vật nướng lại** (mẫu Khe Sanh):
+  - Thay bộ đám đông bộ binh ta và lính VNCH.
+  - Hệ số nhịp bước chỉnh theo sải mới: chạy, xung phong 2,7 m/s; đi 0,97 m/s.
+  - Vị trí lính ngồi trên xe đo lại bằng tia chiếu trên mẫu kho: sàn ZIL-157 1,21 m, sàn T-54B 1,66 m, nóc K-63 2,0–2,1 m.
+- **Dân hai bên phố:**
+  - Chỉ còn người đứng thẳng vẫy tay, vỗ tay.
+  - Bỏ mẫu áo Nam bộ, vì dáng khom: đỉnh đầu chỉ cao 1,3–1,4 m.
+  - Bỏ người đi bộ.
+  - Số người giảm một nửa: hai bên đường khoảng 26 % số chỗ, trước cổng Dinh 65 người.
+  - Sửa dấu góc quay, nay mọi người quay mặt ra đường. Trước đây nhiều người quay lưng ra đường.
+- **Đại đội trưởng Bùi Quang Thận:** tay phải ôm cờ Mặt trận Dân tộc Giải phóng miền Nam Việt Nam (cuộn cờ, phần cờ buông rủ xuống) từ lúc rời xe 843 tới lúc buộc cờ lên cột trên nóc Dinh.
+- **Kiểm tra:**
+  - `quet_phim.py`: nội đô 1122 khung, chiến dịch 809 khung, không lỗi, không khung chậm.
+  - `soat_chu_thich.py`: sạch.
+  - `kiem_tra_goi.py`: hợp lệ.
+
+## 29. V2.1 (29/11, góp ý 02:53, 03:10, 03:26)
+- **Đoạn phố chi tiết** (02:53, theo ảnh phố Sài Gòn đầu thập niên 1970 anh Thắng gửi và trang choquade.ai.studio):
+  - Một đoạn khoảng 420 m trên đường xe 843 và đoàn xe vào Dinh.
+  - Mặt đường:
+    - Lòng đường nhựa 15 m có vạch sơn.
+    - Rãnh nước, bó vỉa.
+    - Vỉa hè lát gạch 6 m.
+  - Hai bên phố:
+    - Hàng cây.
+    - Cột đèn cần cong.
+    - Cột điện bê tông có xà và dây võng.
+  - Dãy nhà phố 2–4 tầng: mặt tiền vẽ bằng canvas, có cửa chớp, ban công sắt, cửa hiệu, kệ hàng, cửa xếp. Thêm mái hiên vải sọc và bảng hiệu.
+  - Lúc máy quay ở gần (dưới 160 m, cách đoạn phố dưới 650 m), đoạn chi tiết hiện. Nhà dạng khối trong hành lang đoạn phố ẩn đi. Lên cao thì đổi lại như cũ.
+  - Dân đứng trên mặt vỉa hè.
+  - T02-A, từ 767,5 s: máy đứng sát mép bó vỉa, nhìn dọc phố. Xe 843 rồi đoàn xe 390 đi tới; máy lia theo xe đi qua.
+  - Tên cửa hiệu, màu nhà, vị trí cây, cột: MINH HOẠ, tên tự đặt.
+- **Bảng hiệu** (03:26):
+  - Hai kiểu chữ nhúng sẵn, cắt còn bộ chữ tiếng Việt, giấy phép OFL, đặt ở `props/phong/`:
+    - Lora Bold Italic: nét nghiêng kiểu viết tay.
+    - Anton: chữ in cao, hẹp.
+  - Màu sơn phai, viền kẻ đôi, ô số nhà, vết ố và rỉ chảy.
+  - Chưa có phông chữ viết tay thật có dấu tiếng Việt trong máy. Lobster, Pacifico (OFL) cần tải về; chờ anh đồng ý.
+- **Pháo M-46** (03:10):
+  - Pháo đang kéo: nòng ngóc lên 8° so với mặt đất, bù góc đầu càng ngóc lên móc xe kéo.
+  - Pháo ở trận địa: nòng nâng khoảng 29°, thân pháo nghiêng theo dốc để càng không lút vào đất.
+- **Bộ binh trên xe** (03:26): trên xe tăng, xe tải, K-63 đổi từ ngồi sang quỳ thế thủ ôm súng (động tác `quy`), quay mặt ra hai bên sườn xe.
+- **C09-B lính ngồi lên đầu xe:**
+  - Nguyên nhân: `xeCapNhat` đặt hướng xe rồi `rotateX` theo độ dốc. Góc Euler đọc lại `rotation.y` bị lật thành π − hướng khi xe quay quá ±90°.
+  - Sửa: hướng mũi xe lấy từ quaternion (`yawXe`). Áp cho chỗ đặt người trên xe và các máy quay bám xe nội đô.
+- **Tân Sơn Nhất C07, xe tăng đâm xuyên máy bay:**
+  - Đường đi của xe tăng và xe chở bộ binh dời vào làn trống giữa dãy A-37 (lệch 0–27 m) và dãy C-130A (60–90 m).
+  - Kiểm bằng số: từ 478 tới 545 s không xe nào cách máy bay dưới mức an toàn (C-130A 22 m, A-37 7 m, UH-1 9 m).
+- **Mẫu lính mới có xương bàn tay** (`_KHO-CHUNG/nhan-vat/LinhQDVN1972/mu_tai_beo_v1/linh-qdvn-mtb.glb`, 28/11): chưa dùng được ngay.
+  - Mẫu mới chỉ có 3 động tác (đứng, đi, chạy) và chưa có súng.
+  - Muốn có dáng quỳ hoặc ngồi ôm súng cần ba bước:
+    - Chuyển các clip có súng sang khung 65 xương.
+    - Đặt AK và cho ngón tay nắm súng (`tay_nam.py`).
+    - Nướng `.nvz`.
+  - Các bước này cần Blender: cài `bpy` ở đây, hoặc chạy trên máy anh. Chờ anh đồng ý.
+

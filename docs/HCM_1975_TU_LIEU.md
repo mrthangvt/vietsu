@@ -404,3 +404,37 @@ Làm theo hai ảnh anh gửi: ảnh một góc phố chụp từ trên cao và 
   - Cảnh 11:30: máy bắt đầu từ xa (900 m, cao 320 m) rồi bay vào đầu cầu Sài Gòn. Có ụ bê tông, ụ đất cho bộ binh hai bên khi giao tranh với M48.
   - 11:57: bỏ nhà trong vòng 55 m quanh ngã tư Hàng Xanh và mọi nhà nằm trên lòng đường đoàn xe đi (cách tim đường dưới 12 m).
   - 390 húc cổng: hai cánh cổng bật vào sân, gãy khỏi trụ, đổ nằm trên bãi cỏ hai bên lối vào. Trước đây cánh cổng nằm lơ lửng chắn ngang lối, vì gốc toạ độ cánh ở tâm cánh.
+
+## 28. Sửa V2.0, gói 1.1.0 (29/11, góp ý 02:32)
+- **Khí tài thay bằng mẫu kho chung** (`_KHO-CHUNG/khi-tai`, chép vào `props/khi-tai/`):
+  - Xe: T-54B, M48A3, M41A3, M113, K-63, ZIL-157, ATS-59, lựu pháo M-46.
+  - Máy bay: A-37B, C-130A, UH-1H.
+  - `rieng.js` đổi đường dẫn cũ sang mẫu kho ngay trong `glbLoad`, nên không phải sửa từng chỗ dùng.
+  - Bánh xe quay theo quãng đường xe đi. Xích chạy bằng morph. Cánh quạt chỉ quay khi máy bay đang bay, máy bay đỗ thì đứng yên.
+  - Xe ở xa (quá 150 m × tỉ lệ) dùng một lưới gộp cho nhẹ.
+  - Số hiệu 843, 390 dán lên tháp pháo, đặt bằng tia chiếu vào mặt tháp.
+- **Xe kéo pháo:** ATS-59 bánh xích kéo M-46, càng pháo móc vào xe. Trước đây dùng xe tải kéo.
+- **Cảnh cận khí tài:**
+  - Đoàn xe tầng chiến dịch: nửa đầu mỗi cú máy lướt đoàn quay sát sườn một xe (xe tăng, ATS-59 + M-46, K-63, xe tải), thấy bánh xe và xích chạy, rồi cẩu máy lên cao như cũ.
+  - Nội đô:
+    - T02-A: máy thấp sát sườn xe 843, phía sau là hai hàng dân vẫy chào.
+    - C10-B: máy phía trước, chếch sườn xe 843.
+  - Tân Sơn Nhất:
+    - C04-A: máy vòng sát chiếc C-130A rồi sát trực thăng UH-1.
+    - C04-B: máy phía trước chếch sườn chiếc A-37 dẫn đầu, sau lùi xa.
+- **Nhân vật nướng lại** (mẫu Khe Sanh):
+  - Thay bộ đám đông bộ binh ta và lính VNCH.
+  - Hệ số nhịp bước chỉnh theo sải mới: chạy, xung phong 2,7 m/s; đi 0,97 m/s.
+  - Vị trí lính ngồi trên xe đo lại bằng tia chiếu trên mẫu kho: sàn ZIL-157 1,21 m, sàn T-54B 1,66 m, nóc K-63 2,0–2,1 m.
+- **Dân hai bên phố:**
+  - Chỉ còn người đứng thẳng vẫy tay, vỗ tay.
+  - Bỏ mẫu áo Nam bộ, vì dáng khom: đỉnh đầu chỉ cao 1,3–1,4 m.
+  - Bỏ người đi bộ.
+  - Số người giảm một nửa: hai bên đường khoảng 26 % số chỗ, trước cổng Dinh 65 người.
+  - Sửa dấu góc quay, nay mọi người quay mặt ra đường. Trước đây nhiều người quay lưng ra đường.
+- **Đại đội trưởng Bùi Quang Thận:** tay phải ôm cờ Mặt trận Dân tộc Giải phóng miền Nam Việt Nam (cuộn cờ, phần cờ buông rủ xuống) từ lúc rời xe 843 tới lúc buộc cờ lên cột trên nóc Dinh.
+- **Kiểm tra:**
+  - `quet_phim.py`: nội đô 1122 khung, chiến dịch 809 khung, không lỗi, không khung chậm.
+  - `soat_chu_thich.py`: sạch.
+  - `kiem_tra_goi.py`: hợp lệ.
+

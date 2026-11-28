@@ -1010,11 +1010,20 @@ if (TANG === 'chien-dich') {
       const m = new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: mau, transparent: true, opacity: 0.8, depthWrite: false, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: -4 }));
       m.renderOrder = ro; m.visible = false; m.userData = { n, L: D.L }; scene.add(m); return m; };
     KT.vetDat = (m, d) => { const k = Math.max(0, Math.min(m.userData.n - 1, Math.floor(d / m.userData.L * (m.userData.n - 1)))); m.geometry.setDrawRange(0, k * 6); };
+    // V2.0 (anh Thắng 03:03: "càng pháo chưa khớp vào xe kéo"): mắt kéo đầu càng M-46 (nút tai_keo) móc đúng vào móc kéo sau đuôi ATS-59 (nút moc_keo);
+    // pháo đặt theo hướng từ bánh pháo tới móc, ngóc nhẹ đầu càng lên cho bằng độ cao móc
+    KT.mocPhao = (X, D, d, y) => { const o = X.o, g = X.keo;
+      if (!X.moc) { const tim = (r, ten, dd) => { let n = null; r.traverse((m) => { if (!n && m.name === ten) n = m; }); if (!n) return dd; const v = V3(); r.updateMatrixWorld(true); n.getWorldPosition(v); return r.worldToLocal(v); };
+        X.moc = tim(o, 'moc_keo', V3(0, 0.95, -3.3)); X.tai = tim(g, 'tai_keo', V3(0, 0.27, -5.7)); }
+      o.updateMatrixWorld(true); const H = o.localToWorld(X.moc.clone()), s0 = g.scale.x, b = diemTren(D, d - (Math.abs(X.moc.z) + Math.abs(X.tai.z)) * s0 / o.scale.x * o.scale.x);
+      const gy = Math.max(hG(b.x, b.z) + 0.5, CAU_Y(b.x, b.z)), yaw = Math.atan2(-(H.x - b.x), -(H.z - b.z)), L = Math.hypot(X.tai.y, X.tai.z);
+      const p = Math.max(-0.3, Math.min(0.3, Math.asin(Math.max(-1, Math.min(1, ((H.y - gy) / s0) / L))) - Math.atan2(X.tai.y, -X.tai.z)));
+      g.rotation.set(p, yaw, 0, 'YXZ'); g.updateMatrixWorld(true); const T = X.tai.clone().multiplyScalar(s0).applyEuler(g.rotation); g.position.set(H.x - T.x, H.y - T.y, H.z - T.z); };
     const cot = (k, t0, t1, f1) => { const P = RT(k), D = duong(P), X = [];
       ['TK', 'TK', 'TK', 'K', 'T', 'T', 'TP', 'TK', 'K', 'T', 'T', 'TP', 'T', 'TK', 'K', 'T', 'T', 'TP', 'T', 'TK', 'K', 'T', 'T', 'TP', 'T', 'T', 'K', 'T'].forEach((k, i) => {   /* anh Thắng V1.2: đoàn dài hơn, nhiều xe tăng, xe chở quân, xe kéo pháo */ const g = k === 'K' ? gK : k === 'TK' ? gTK : k === 'TP' ? gA || gT : gT; if (!g) return;   // V2.0: TP = xe kéo pháo bánh xích ATS-59 kéo lựu pháo M-46 (kho khí tài)   // TK: xe tăng T-54 (mẫu 390, ẩn số hiệu)
         const o = moi(g); o.visible = false; scene.add(o); const c = co(3.6, 1.8, mMT); c.position.set(0, k === 'TK' ? 2.9 : 2.4, -2.2); o.add(c);
         if (k === 'TK') o.traverse((m) => { if (/^so-hieu/.test(m.name)) m.visible = false; });
-        let keo = null; if (k === 'TP' && gP) { keo = moi(gP, KS); keo.visible = false; scene.add(keo); } X.push({ o, keo, i, k }); });
+        let keo = null; if (k === 'TP' && gP) { keo = moi(gP, KS); keo.visible = false; scene.add(keo); } X.push({ o, keo, i, k, off: X.length ? X[X.length - 1].off + CACH + (X[X.length - 1].k === 'TP' ? 32 : 0) : 0 }); });   // V2.0: sau xe kéo pháo chừa thêm 32 m (pháo M-46 dài 35 m ở tỉ lệ ×3)
       const d1 = f1 * D.L, d0 = Math.max(0, d1 - VAN * (t1 - t0)); const C = { D, X, t0, t1, d0, d1, k, vet: vet(P, MAU[k] || 0xd2442b) }; KT.cot.push(C); return C; };
     KT.c01a = cot('xl', MV.c01_l1 - 1, MV.c01_d + 1, 0.55); KT.c01b = cot('xl', MV.c01_l2 - 1, MV.c01_p + 1, 0.82); KT.c01c = cot('xl', MV.c01_l3 - 1, MV.c01_rut, 0.95);
     KT.c02a = cot('bac', MV.c02_l1 - 1, MV.c02_l2 + 1, 0.75); KT.c02b = cot('tb', MV.c02_l2 - 1, MV.c02_vay + 1, 0.8);
@@ -1038,11 +1047,11 @@ if (TANG === 'chien-dich') {
     KT.cap = (t) => {
       { const on6 = t >= C06.t0 && t < C06.t1; for (const m of KT.vet6) { m.visible = on6; if (on6) KT.vetDat(m, m.userData.L * sstep(C06.t0, MV.c06_tc + 4, t)); } }
       for (const C of KT.cot) { const on = t >= C.t0 && t < C.t1, dh = C.d0 + (C.d1 - C.d0) * clamp((t - C.t0) / (C.t1 - C.t0), 0, 1);
-        C.vet.visible = on; if (on) KT.vetDat(C.vet, dh - C.X.length * CACH);
+        C.vet.visible = on; if (on) KT.vetDat(C.vet, dh - (C.X.length ? C.X[C.X.length - 1].off + CACH : 0));
         for (const X of C.X) { X.o.visible = on; if (X.keo) X.keo.visible = on; if (!on) continue;
-          const d = dh - X.i * CACH, p = diemTren(C.D, d), q = diemTren(C.D, d + 8), y = huong(p, q);
+          const d = dh - X.off, p = diemTren(C.D, d), q = diemTren(C.D, d + 8), y = huong(p, q);
           X.o.position.set(p.x, Math.max(hG(p.x, p.z) + 0.5, CAU_Y(p.x, p.z)), p.z); X.o.rotation.y = y;
-          if (X.keo) { const b = diemTren(C.D, d - (gA ? 28 : 34)); X.keo.position.set(b.x, Math.max(hG(b.x, b.z) + 0.5, CAU_Y(b.x, b.z)), b.z); X.keo.rotation.y = y + Math.PI; } } }
+          if (X.keo) KT.mocPhao(X, C.D, d, y); } }
       for (const T of KT.td) { const on = t >= T.t0 && t < T.t1; T.on = on;
         for (const G of T.S) { const ph = ((t - T.t0) / 2.4 + G.ph) % 1, ban = on && ph < 0.09;
           G.lua.visible = ban; if (ban) { G.lua.position.set(G.x + T.f.x * 40, G.y + 9, G.z + T.f.z * 40); G.lua.scale.setScalar(30 + ph * 300); }
@@ -1057,7 +1066,7 @@ if (TANG === 'chien-dich') {
     KT.camCot = (C) => (u, t) => { const dh = C.d0 + (C.d1 - C.d0) * clamp((t - C.t0) / (C.t1 - C.t0), 0, 1);
       // V1.9 (anh Thắng: máy trên cao đừng lấy K-63 làm tâm mãi): mỗi cú máy chọn một xe làm tâm (xe tăng, xe tải chở bộ binh, xe kéo pháo, K-63…) theo thứ tự trong đoàn,
       // trong cú máy lia dần sang xe kế tiếp; cú máy chẵn, lẻ bay ở hai bên sườn đoàn
-      const ks = Math.abs(Math.floor(C.t0 * 13)), sel = [1, 4, 6, 3, 0, 5, 8, 2][ks % 8], dm = dh - (sel + u * 1.4) * CACH, ben = ks % 2 ? -1 : 1;
+      const ks = Math.abs(Math.floor(C.t0 * 13)), sel = [1, 4, 6, 3, 0, 5, 8, 2][ks % 8], dm = dh - ((C.X[sel] ? C.X[sel].off : sel * CACH) + u * 1.4 * CACH), ben = ks % 2 ? -1 : 1;
       const m = diemTren(C.D, Math.max(0, dm)), a = diemTren(C.D, Math.max(0, dm - 100)), b = diemTren(C.D, Math.max(0, dm + 100));
       const n = V3(b.z - a.z, 0, a.x - b.x); if (n.lengthSq() < 1e-6) n.set(1, 0, 0); n.normalize().multiplyScalar(140 * ben);
       const cx = a.x + n.x, cz = a.z + n.z, hc = Math.max(hG(cx, cz), hG(a.x, a.z), hG(m.x, m.z));

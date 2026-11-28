@@ -413,7 +413,9 @@ Làm theo hai ảnh anh gửi: ảnh một góc phố chụp từ trên cao và 
   - Bánh xe quay theo quãng đường xe đi. Xích chạy bằng morph. Cánh quạt chỉ quay khi máy bay đang bay, máy bay đỗ thì đứng yên.
   - Xe ở xa (quá 150 m × tỉ lệ) dùng một lưới gộp cho nhẹ.
   - Số hiệu 843, 390 dán lên tháp pháo, đặt bằng tia chiếu vào mặt tháp.
-- **Xe kéo pháo:** ATS-59 bánh xích kéo M-46, càng pháo móc vào xe. Trước đây dùng xe tải kéo.
+- **Xe kéo pháo:** ATS-59 bánh xích kéo M-46. Trước đây dùng xe tải kéo.
+  - Góp ý 03:03: mắt kéo đầu càng M-46 (`tai_keo`) móc đúng vào móc kéo sau đuôi ATS-59 (`moc_keo`), đầu càng ngóc nhẹ cho bằng độ cao móc.
+  - Xe đi sau mỗi xe kéo pháo cách thêm 32 m (pháo dài 35 m ở tỉ lệ ×3), không còn đè vào nòng pháo.
 - **Cảnh cận khí tài:**
   - Đoàn xe tầng chiến dịch: nửa đầu mỗi cú máy lướt đoàn quay sát sườn một xe (xe tăng, ATS-59 + M-46, K-63, xe tải), thấy bánh xe và xích chạy, rồi cẩu máy lên cao như cũ.
   - Nội đô:

@@ -201,6 +201,13 @@ Theo yêu cầu chủ dự án (26/11):
   - Dân đứng thẳng vẫy tay, vỗ tay, quay mặt ra đường, số người giảm một nửa.
   - Anh Bùi Quang Thận ôm cờ Mặt trận khi chạy vào Dinh.
   - Xem `docs/HCM_1975_TU_LIEU.md` §28.
+- **V2.1 (29/11):**
+  - Đoạn phố chi tiết 420 m: vỉa hè, cây, cột đèn, cột điện, nhà phố, bảng hiệu chữ viết tay màu cũ. Lên cao thì về nhà dạng khối.
+  - Máy quay đứng một góc phố nhìn đoàn xe.
+  - Nòng pháo M-46 hướng lên trời.
+  - Bộ binh trên xe quỳ thế thủ. Sửa lính ngồi lên đầu xe (C09-B).
+  - Xe tăng ở Tân Sơn Nhất không còn đi xuyên máy bay.
+  - Xem `docs/HCM_1975_TU_LIEU.md` §29.
 - Gói `vietsu/static/khong-gian/packs/ho-chi-minh-1975/` trên bộ máy 2.1.0 (`engine: ^2.1`). **Giai đoạn 0 xong** (khung gói, cờ hai phe, `rieng.js` 53 đoạn rỗng, `kiem_tra_goi.py` hợp lệ). Chưa mở được trang sa bàn cho tới khi có `terrain/` (Giai đoạn 2).
 - **Giai đoạn 1 nháp, chờ duyệt:** `docs/HCM_1975_TU_LIEU.md` — 5 hướng và mục tiêu, bảng mốc giờ kèm nguồn S1–S28 (`sources.json`), các chỗ nguồn ghi khác nhau, kịch bản 12 cảnh (`story.json` nháp), danh sách tài sản tái dùng từ Thành cổ.
 - **24/11 (tiếp):** GĐ2 địa hình hai tầng xong (chiến dịch R 56,5 km, nội đô R 6,8 km; lọc hồ, đường làm sau 1975); GĐ3 **bộ máy 2.2.0** xong — mở `khong-gian/engine/2.2.0/sa-ban.html?goi=ho-chi-minh-1975` (bản thử 2 cảnh: 5 mũi tên phác thảo; xe 843, 390 chạy theo phố vào Dinh, trưởng xe có xương; tự đổi tầng khi sang cảnh nội đô). GĐ4 phần xe xong (390, 843, K-63, xe tải, lính lái tăng).

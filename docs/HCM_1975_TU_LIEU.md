@@ -440,3 +440,43 @@ Làm theo hai ảnh anh gửi: ảnh một góc phố chụp từ trên cao và 
   - `soat_chu_thich.py`: sạch.
   - `kiem_tra_goi.py`: hợp lệ.
 
+## 29. V2.1 (29/11, góp ý 02:53, 03:10, 03:26)
+- **Đoạn phố chi tiết** (02:53, theo ảnh phố Sài Gòn đầu thập niên 1970 anh Thắng gửi và trang choquade.ai.studio):
+  - Một đoạn khoảng 420 m trên đường xe 843 và đoàn xe vào Dinh.
+  - Mặt đường:
+    - Lòng đường nhựa 15 m có vạch sơn.
+    - Rãnh nước, bó vỉa.
+    - Vỉa hè lát gạch 6 m.
+  - Hai bên phố:
+    - Hàng cây.
+    - Cột đèn cần cong.
+    - Cột điện bê tông có xà và dây võng.
+  - Dãy nhà phố 2–4 tầng: mặt tiền vẽ bằng canvas, có cửa chớp, ban công sắt, cửa hiệu, kệ hàng, cửa xếp. Thêm mái hiên vải sọc và bảng hiệu.
+  - Lúc máy quay ở gần (dưới 160 m, cách đoạn phố dưới 650 m), đoạn chi tiết hiện. Nhà dạng khối trong hành lang đoạn phố ẩn đi. Lên cao thì đổi lại như cũ.
+  - Dân đứng trên mặt vỉa hè.
+  - T02-A, từ 767,5 s: máy đứng sát mép bó vỉa, nhìn dọc phố. Xe 843 rồi đoàn xe 390 đi tới; máy lia theo xe đi qua.
+  - Tên cửa hiệu, màu nhà, vị trí cây, cột: MINH HOẠ, tên tự đặt.
+- **Bảng hiệu** (03:26):
+  - Hai kiểu chữ nhúng sẵn, cắt còn bộ chữ tiếng Việt, giấy phép OFL, đặt ở `props/phong/`:
+    - Lora Bold Italic: nét nghiêng kiểu viết tay.
+    - Anton: chữ in cao, hẹp.
+  - Màu sơn phai, viền kẻ đôi, ô số nhà, vết ố và rỉ chảy.
+  - Chưa có phông chữ viết tay thật có dấu tiếng Việt trong máy. Lobster, Pacifico (OFL) cần tải về; chờ anh đồng ý.
+- **Pháo M-46** (03:10):
+  - Pháo đang kéo: nòng ngóc lên 8° so với mặt đất, bù góc đầu càng ngóc lên móc xe kéo.
+  - Pháo ở trận địa: nòng nâng khoảng 29°, thân pháo nghiêng theo dốc để càng không lút vào đất.
+- **Bộ binh trên xe** (03:26): trên xe tăng, xe tải, K-63 đổi từ ngồi sang quỳ thế thủ ôm súng (động tác `quy`), quay mặt ra hai bên sườn xe.
+- **C09-B lính ngồi lên đầu xe:**
+  - Nguyên nhân: `xeCapNhat` đặt hướng xe rồi `rotateX` theo độ dốc. Góc Euler đọc lại `rotation.y` bị lật thành π − hướng khi xe quay quá ±90°.
+  - Sửa: hướng mũi xe lấy từ quaternion (`yawXe`). Áp cho chỗ đặt người trên xe và các máy quay bám xe nội đô.
+- **Tân Sơn Nhất C07, xe tăng đâm xuyên máy bay:**
+  - Đường đi của xe tăng và xe chở bộ binh dời vào làn trống giữa dãy A-37 (lệch 0–27 m) và dãy C-130A (60–90 m).
+  - Kiểm bằng số: từ 478 tới 545 s không xe nào cách máy bay dưới mức an toàn (C-130A 22 m, A-37 7 m, UH-1 9 m).
+- **Mẫu lính mới có xương bàn tay** (`_KHO-CHUNG/nhan-vat/LinhQDVN1972/mu_tai_beo_v1/linh-qdvn-mtb.glb`, 28/11): chưa dùng được ngay.
+  - Mẫu mới chỉ có 3 động tác (đứng, đi, chạy) và chưa có súng.
+  - Muốn có dáng quỳ hoặc ngồi ôm súng cần ba bước:
+    - Chuyển các clip có súng sang khung 65 xương.
+    - Đặt AK và cho ngón tay nắm súng (`tay_nam.py`).
+    - Nướng `.nvz`.
+  - Các bước này cần Blender: cài `bpy` ở đây, hoặc chạy trên máy anh. Chờ anh đồng ý.
+
